@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+body {
+    padding: 0;
+    margin: 0 auto;
+    background-color: black;
+    color: var(--light);
+    user-select: none;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+
+::placeholder {
+    color: var(--light);
+}
+
+
+:root {
+    --dark: #1B1B1B;
+    --less-dark: #333131;
+    --averrage:#5e5e5e;
+    --light: #a1a1a1;
+}
+
+@keyframes grow {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+    1% {
+        display: flex;
+        opacity: .7;
+        transform: scale(.7);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#view { 
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#modals-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.red-text {
+    color: red;
+}
+
+.hud-message-tile {
+    width: 100%;
+    padding: 2px;
+    flex-shrink: 0;
+    background-color: var(--less-dark);
+    border-radius: 3px;
+}
+
+.main-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 1em;
+    background-color: rgba(0, 0, 0, .4);
+    backdrop-filter: blur(5px);
+}
+
+.anim {
+    animation: grow .1s;
+}
+
+.modal-servers-content {
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+}
+
+.modal-servers-tile {
+    padding: 5px;
+    width: 100%;
+    background-color: var(--dark);
+}
+
+#hud-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.hud-leaderboard {
+    width: 200px;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.hud-leaderboard-tile {
+    width: 100%;
+    padding: 3px;
+    border-radius: 5px;
+    background-color: var(--dark);
+    overflow-wrap: break-word;
+}
+
+.hud-tile {
+    display: flex;
+    width: 50%;
+    height: 50%;
+}
+
+.hud-stats {
+    width: 150px;
+    margin: 15px;
+    border-radius: 5px;
+    padding: 3px;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: var(--dark);
+}
+
+.hud-minimap {
+    background-color: var(--dark);
+    border-radius: 15px;
+    margin: 15px;
+}
+
+.hud-chat-input {
+    width: 100%!important;
+    pointer-events: all;
+    border-radius: 0px 0px 5px 5px!important;
+}
+
+
+.hud-chat-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 10px;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 5px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    pointer-events: all;
+}
+
+.hud-chat {
+    border-radius: 15px;
+    margin: 15px;
+    width: 370px;
+    height: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--dark);
+}
+
+.hud-right {
+    justify-content: flex-end;
+}
+
+.hud-bottom {
+    align-items: flex-end;
+}
+
+.panel {
+    width: 400px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1em;
+    background-color: var(--dark);
+    border-radius: 15px;
+} 
+
+.title {
+    font-size: 2.8em;
+}
+
+#play {
+    flex-grow: 1;
+}
+
+#spectate {
+    flex-grow: .3;
+}
+
+#skin {
+    width: calc(30px + 30px + 10px);
+    height: calc(30px + 30px + 10px)!important;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#settings {
+    flex-grow: .7;
+}
+
+#servers {
+    flex-grow: .4;
+}
+
+#name {
+    flex-grow: 1;
+}
+
+.button {
+    flex-shrink: 0;
+    height: 30px;
+    background-color: var(--less-dark);
+    border-radius: 5px;
+    transition: background-color .3s ease-in-out;
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: var(--averrage);
+}
+
+.group-x {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.group-y {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+input[type=text] {
+    width: 0;
+    height: 30px;
+    outline: none;
+    border: none;
+    padding: 5px;
+    color: var(--light);
+    box-sizing: border-box;
+    background-color: var(--less-dark);
+    border-radius: 5px;
+    transition: background-color .1s ease-in-out;
+    font-size: 1em;
+}
+
+input[type=text]:focus {
+    background-color: var(--averrage);
+}
+
+.modal {
+    border-radius: 15px;
+    background-color: var(--dark);
+    position: absolute;
+}
+
+.modal-settings-content {
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.modal-settings-tile {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: space-between;
+    padding-left: 5px;
+    border-radius: 5px;
+    background-color: var(--less-dark);
+}
+
+.modal-header {
+    width: 100%;
+    padding: 5px;
+    border-radius: 15px 15px 0px 0px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.modal-close {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: var(--light);
+    cursor: pointer;
+}
+
+.modal-skins-content {
+    width: 100%;
+    height: 80%;
+    padding: 15px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.modal-skin-tile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 180px;
+}
+
+.modal-background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, .4);
+}
+
+.round {
+    border-radius: 50%;
+}

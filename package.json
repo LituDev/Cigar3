@@ -1,0 +1,27 @@
+{
+  "name": "cigar3",
+  "version": "1.0.0",
+  "description": "A protocol 5 client for ogar servers.",
+  "main": "./web/js/main.js",
+  "dependencies": {
+    "fastify": "^3.27.2",
+    "fastify-static": "^4.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "cigar3": "node webServer.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LituDev/Cigar3.git"
+  },
+  "keywords": [
+    "Ogar3"
+  ],
+  "author": "LituDev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LituDev/Cigar3/issues"
+  },
+  "homepage": "https://github.com/LituDev/Cigar3#readme"
+}

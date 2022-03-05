@@ -1,0 +1,10 @@
+{
+    "0": {
+        "src": "./skins/doge.png",
+        "label": "Doge" 
+    },
+    "1": {
+        "src": "./skins/pokerface.png",
+        "label": "Pokerface"
+    }
+}

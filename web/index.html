@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Eat cells smaller than you and don't get eaten by the bigger ones, as an MMO">
+    <meta name="keywords" content="agario, agar, io, cell, cells, virus, bacteria, blob, game, games, web game, html5, fun, flash">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <title>Cigar3</title>
+    <link id="favicon" rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.2.2/browser/pixi.min.js" integrity="sha512-JXgRCwQo7D72mCx/XI+Xb0JjgZiyKKjftJJBH45wWSXNWda/VjvU3NHfkUlItCH26enFd5JRlPtkNqPmvyXw3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <canvas id="view"></canvas>
+    <div id="hud-container">
+        <div class="hud-tile">
+            <div class="hud-stats">
+                <div id="score">Score</div>
+                <div id="ping">Ping</div>
+                <div id="minion-controlled">Minion Controlled</div>
+            </div>
+        </div>
+        <div class="hud-tile hud-right">
+            <div id="leaderboard" class="hud-leaderboard"></div>
+        </div>
+        <div class="hud-tile hud-bottom">
+            <div class="hud-chat">
+                <div id="chat-content" class="hud-chat-content"></div>
+                <input id="chat-field" type="text" placeholder="Chat here!" class="hud-chat-input">
+            </div>
+        </div>
+        <div class="hud-tile hud-bottom hud-right">
+            <canvas id="minimap-view" width="250" height="250" class="hud-minimap"></canvas>
+        </div>
+    </div>
+    <div id="user-interface" class="main-container center">
+        <div class="panel anim">
+            <div class="title">Cigar3;</div>
+            <div class="group-y">
+                <div class="group-x">
+                    <div class="group-y">
+                        <div class="group-x">
+                            <input type="text" id="name" placeholder="Name">
+                            <div id="settings" class="button center">Settings</div>
+                            <div id="servers" class="button center">Servers</div>
+                        </div>
+                        <div class="group-x">
+                            <div id="play" class="button center">Play</div>
+                            <div id="spectate" class="spectate button center">Spectate</div>
+                        </div>
+                    </div>
+                    <div id="skin" class="button center round">Skins</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modals-container">
+    </div>
+    <script src="./js/main.js" type="module"></script>
+</body>
+</html>
