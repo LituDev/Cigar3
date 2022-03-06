@@ -222,15 +222,15 @@ export default class UserInterface {
                 this.core.net.sendE()
                 break
             }
-            case "KeyE": {
+            case "KeyR": {
                 this.core.net.sendR()
                 break
             }
-            case "KeyE": {
+            case "KeyT": {
                 this.core.net.sendT()
                 break
             }
-            case "KeyE": {
+            case "KeyP": {
                 this.core.net.sendP()
                 break
             }
