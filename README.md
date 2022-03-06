@@ -4,7 +4,7 @@ A fast **Protocol 6** Agar.io client for private servers
 ![Cigar3](https://i.imgur.com/HZy0eHA.png)
 
 ## **Getting started.**
-After installing [nodejs](https://nodejs.org/), run `npm install` and `npm run cigar3` in a terminal. Then just paste in your browser `localhost:3000` to enjoy the client.
+After installing [nodejs](https://nodejs.org/), run `npm install` and `npm run cigar3` in a terminal in the cigar3's root. Then just paste in your browser `localhost:3000` to enjoy the client.
 
 ## **Where can I get some help?**
 If you need extra help with anything you should ask it in the [Agar.io Private Servers Discord](https://discord.gg/XcKgShT) and not in issues.
