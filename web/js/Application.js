@@ -35,6 +35,8 @@ export default class {
     }
 
     drawBorder() {
+        if (this.borderGraphics) this.borderGraphics.destroy()
+
         const border = this.core.net.border
         this.borderGraphics = new PIXI.Graphics()
         .lineStyle(50, 0xffffff)
@@ -44,6 +46,8 @@ export default class {
     }
 
     drawBackground() {
+        if (this.backgroundGraphics) this.backgroundGraphics.destroy()
+
         const border = this.core.net.border
         this.backgroundGraphics = new PIXI.Graphics()
         .beginFill(0x222222)
