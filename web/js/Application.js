@@ -115,6 +115,7 @@ export default class {
 
         const star = new PIXI.Graphics()
         .beginFill(0xffffff)
+        .lineStyle(10, 0x777777, 1)
         .drawPolygon(new Star(256, 256, 30, 256, 220, 0))
         .endFill();
 
