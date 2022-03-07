@@ -255,6 +255,7 @@ export default class Network {
         }, 2000);
        this.core.app.drawBorder()
        this.core.app.drawBackground()
+       this.core.app.drawGrid()
     }
 
     sendSplit() {

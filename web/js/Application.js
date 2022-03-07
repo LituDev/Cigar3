@@ -41,6 +41,7 @@ export default class {
         this.borderGraphics = new PIXI.Graphics()
         .lineStyle(50, 0xffffff)
         .drawRect(-border.width / 2, -border.height / 2, border.width, border.height);
+        this.borderGraphics.visible = this.core.settings.border
 
         this.stage.addChild(this.borderGraphics)
     }
@@ -53,8 +54,30 @@ export default class {
         .beginFill(0x222222)
         .drawRect(-border.width / 2, -border.height / 2, border.width, border.height)
         .endFill()
+        this.backgroundGraphics.visible = this.core.settings.background
 
         this.stage.addChild(this.backgroundGraphics)
+    }
+
+    drawGrid() {
+        if (this.gridSprite) this.gridSprite.destroy()
+
+        const border = this.core.net.border
+        const g = new PIXI.Graphics()
+        const width = 100
+        const height = 100
+        g.lineStyle(10, 0x333333, 1)
+        g.moveTo(width, 0)
+        g.lineTo(0, 0)
+        g.moveTo(width / 2, height / 2)
+        g.lineTo(width / 2, -height / 2)
+        const texture = this.renderer.generateTexture(g, PIXI.SCALE_MODES.LINEAR, 1, new PIXI.Rectangle(0, 0, width / 2, height / 2))
+        texture.baseTexture.mipmap = true
+        this.gridSprite = new PIXI.TilingSprite(texture, border.width, border.height)
+        this.gridSprite.position.set(-border.width / 2, -border.height / 2)
+        this.gridSprite.visible = this.core.settings.grid
+
+        this.stage.addChild(this.gridSprite)
     }
 
     initMinimap() {
