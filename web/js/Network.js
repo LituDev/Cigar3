@@ -333,6 +333,7 @@ export default class Network {
         for (let i = 0; i < addedCount; i++) {
             const killer = reader.getUint32();
             const killed = reader.getUint32();
+			if (!cellsByID.has(killer) || !cellsByID.has(killed)) continue;
             cellsByID.get(killed).destroy(killer);
         }
 
@@ -379,7 +380,7 @@ export default class Network {
         const removedCount = reader.getUint16();
         for (let i = 0; i < removedCount; i++) {
             const killed = reader.getUint32();
-            if (cellsByID.has(killed))
+            if (cellsByID.has(killed) && !cellsByID.get(killed).destroyed)
                 cellsByID.get(killed).destroy(null)
         }
     }
