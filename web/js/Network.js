@@ -191,21 +191,24 @@ export default class Network {
     
     onChatMessage(reader) {
         const flagMask = reader.getUint8();
-        const flags = {
-            server: !!(flagMask & 0x80),
-            admin: !!(flagMask & 0x40),
-            mod: !!(flagMask & 0x20),
+        const color = {
+            r: reader.getUint8(),
+            g: reader.getUint8(),
+            b: reader.getUint8()
         }
-        const color = [reader.getUint8(), reader.getUint8(), reader.getUint8()]
         const rawName = reader.getStringUTF8()
         const content = reader.getStringUTF8()
         const name = Cell.parseName(rawName).name || "Unnamed"
 
-        if (flags.server && name !== 'SERVER') name = `[SERVER] ${name}`;
-            if (flags.admin) name = `[ADMIN] ${name}`;
-            if (flags.mod) name = `[MOD] ${name}`;
+        const server = flagMask & 0x80 ? true : false
+        const admin = flagMask & 0x40 ? true : false
+        const mod = flagMask & 0x20 ? true : false
 
             this.messages.push({
+                server, 
+                admin,
+                mod,
+                color,
                 name,
                 content
             });

@@ -118,7 +118,9 @@ export default class UserInterface {
         for (const message of this.core.net.messages) {
             contentStr += `
             <div class="hud-message-tile">
-                ${message.name} - ${message.content}
+                <span class="hud-message-item" style="color: rgb(${message.color.r}, ${message.color.g}, ${message.color.b})">
+                    ${(message.server || message.admin || message.mod) ? (message.server ? "[SERVER]" : message.admin ? "[ADMIN]" : "[MOD]") : ""}${message.name}: <span class="hud-message">${message.content}</span>
+                </span>
             </div>`
         }
         this.chatContent.innerHTML = ""
