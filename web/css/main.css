@@ -71,6 +71,16 @@ body {
     border-radius: 3px;
 }
 
+.hud-message-item {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.hud-message {
+    display: inline;
+    color: #ffffff;
+}
+
 .main-container {
     position: absolute;
     width: 100%;
