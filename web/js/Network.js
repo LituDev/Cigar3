@@ -492,14 +492,6 @@ class Reader {
     getStringUTF8() {
         let s = '', b;
         while ((b = this.view.getUint8(this._o++)) !== 0) s += String.fromCharCode(b);
-        return decodeURIComponent(this.escapeHtml(s));
-    }
-    escapeHtml(unsafe) {
-        return unsafe
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
+        return decodeURIComponent(escape(s));
     }
 }
