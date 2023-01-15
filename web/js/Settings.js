@@ -53,6 +53,15 @@ export default class {
         this.rawSettings.background = value
     }
 
+    get rainbowBorder() {
+        return this.rawSettings.rainbowBorder
+    }
+
+    set rainbowBorder(value) {
+        this.core.app.rainbowSprite.visible = value
+        this.rawSettings.rainbowBorder = value
+    }
+
     get border() {
         return this.rawSettings.border
     }

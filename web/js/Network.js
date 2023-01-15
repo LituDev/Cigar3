@@ -256,9 +256,10 @@ export default class Network {
             this.send(new Uint8Array([254]))
             this.pingLoopTime = Date.now()
         }, 2000);
-       this.core.app.drawBorder()
-       this.core.app.drawBackground()
-       this.core.app.drawGrid()
+        this.core.app.drawBackground()
+        this.core.app.drawGrid()
+        this.core.app.drawRainbowBorder()
+        this.core.app.drawBorder()
     }
 
     sendSplit() {
@@ -491,14 +492,6 @@ class Reader {
     getStringUTF8() {
         let s = '', b;
         while ((b = this.view.getUint8(this._o++)) !== 0) s += String.fromCharCode(b);
-        return decodeURIComponent(this.escapeHtml(s));
-    }
-    escapeHtml(unsafe) {
-        return unsafe
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
+        return decodeURIComponent(escape(s));
     }
 }

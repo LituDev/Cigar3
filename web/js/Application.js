@@ -59,9 +59,29 @@ export default class {
         this.stage.addChild(this.backgroundGraphics)
     }
 
-    drawGrid() {
-        if (this.gridSprite) this.gridSprite.destroy()
+    drawRainbowBorder() {
+        const border = this.core.net.border
+        this.rainbowSprite = new PIXI.Sprite.from('./sprites/rainbow-border.png')
+        this.rainbowSprite.anchor.set(0.5)
+        this.rainbowSprite.width = border.width * 1.043
+        this.rainbowSprite.height = border.height * 1.043
+        this.colorMatrix = new PIXI.filters.ColorMatrixFilter()
+        this.rainbowSprite.filters = [this.colorMatrix] 
+        this.hueDegree = 0
+        this.rainbowSprite.visible = this.core.settings.rainbowBorder
 
+        this.stage.addChild(this.rainbowSprite)
+        this.performHueShifting()
+    }
+
+    performHueShifting() {
+        this.hueDegree += 1
+        if (this.hueDegree > 360) this.hueDegree = 0
+        this.colorMatrix.hue(this.hueDegree)
+        requestAnimationFrame(this.performHueShifting.bind(this))
+    }
+
+    drawGrid() {
         const border = this.core.net.border
         const g = new PIXI.Graphics()
         const width = 100
@@ -73,11 +93,11 @@ export default class {
         g.lineTo(width / 2, -height / 2)
         const texture = this.renderer.generateTexture(g, PIXI.SCALE_MODES.LINEAR, 1, new PIXI.Rectangle(0, 0, width / 2, height / 2))
         texture.baseTexture.mipmap = true
-        this.gridSprite = new PIXI.TilingSprite(texture, border.width, border.height)
-        this.gridSprite.position.set(-border.width / 2, -border.height / 2)
-        this.gridSprite.visible = this.core.settings.grid
+        const gridSprite = new PIXI.TilingSprite(texture, border.width, border.height)
+        gridSprite.position.set(-border.width / 2, -border.height / 2)
+        gridSprite.visible = this.core.settings.grid
 
-        this.stage.addChild(this.gridSprite)
+        this.stage.addChild(gridSprite)
     }
 
     initMinimap() {
@@ -103,7 +123,8 @@ export default class {
             view,
             width: innerWidth,
             height: innerHeight,
-            antialiasing: false
+            antialiasing: false,
+            powerPreference: 'high-performance'
         })
         this.stage = new PIXI.Container()
         this.stage.sortableChildren = true

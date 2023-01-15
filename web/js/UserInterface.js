@@ -87,9 +87,10 @@ export default class UserInterface {
         let contentStr = `<div class="modal-settings-content">`
         const settings = this.core.settings.rawSettings
         for (const setting in settings) {
+            const inputValue = setting.replace(/[A-Z]/g, char => ' ' + char.toLowerCase())
             contentStr += `
             <div class="modal-settings-tile">
-            ${setting}<input type="checkbox" id="setting-${setting}" ${settings[setting] ? "checked" : ""}>
+            ${inputValue}<input type="checkbox" id="setting-${setting}" ${settings[setting] ? "checked" : ""}>
             </div>
             `
         }

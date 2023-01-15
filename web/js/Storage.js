@@ -5,6 +5,7 @@ export default class {
             names: true,
             mass: true,
             background: true,
+            rainbowBorder: true,
             border: true,
             grid: true
         }
