@@ -60,6 +60,8 @@ export default class {
     }
 
     drawRainbowBorder() {
+        if (this.rainbowSprite) this.rainbowSprite.destroy()
+        
         const border = this.core.net.border
         this.rainbowSprite = new PIXI.Sprite.from('./sprites/rainbow-border.png')
         this.rainbowSprite.anchor.set(0.5)
@@ -82,6 +84,8 @@ export default class {
     }
 
     drawGrid() {
+        if (this.gridSprite) this.gridSprite.destroy()
+
         const border = this.core.net.border
         const g = new PIXI.Graphics()
         const width = 100
@@ -93,11 +97,11 @@ export default class {
         g.lineTo(width / 2, -height / 2)
         const texture = this.renderer.generateTexture(g, PIXI.SCALE_MODES.LINEAR, 1, new PIXI.Rectangle(0, 0, width / 2, height / 2))
         texture.baseTexture.mipmap = true
-        const gridSprite = new PIXI.TilingSprite(texture, border.width, border.height)
-        gridSprite.position.set(-border.width / 2, -border.height / 2)
-        gridSprite.visible = this.core.settings.grid
+        this.gridSprite = new PIXI.TilingSprite(texture, border.width, border.height)
+        this.gridSprite.position.set(-border.width / 2, -border.height / 2)
+        this.gridSprite.visible = this.core.settings.grid
 
-        this.stage.addChild(gridSprite)
+        this.stage.addChild(this.gridSprite)
     }
 
     initMinimap() {
