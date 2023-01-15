@@ -256,9 +256,10 @@ export default class Network {
             this.send(new Uint8Array([254]))
             this.pingLoopTime = Date.now()
         }, 2000);
-       this.core.app.drawBorder()
-       this.core.app.drawBackground()
-       this.core.app.drawGrid()
+        this.core.app.drawBackground()
+        this.core.app.drawGrid()
+        this.core.app.drawRainbowBorder()
+        this.core.app.drawBorder()
     }
 
     sendSplit() {

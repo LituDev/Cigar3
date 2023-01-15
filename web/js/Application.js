@@ -59,6 +59,30 @@ export default class {
         this.stage.addChild(this.backgroundGraphics)
     }
 
+    drawRainbowBorder() {
+        if (this.rainbowSprite) this.rainbowSprite.destroy()
+
+        const border = this.core.net.border
+        this.rainbowSprite = new PIXI.Sprite.from('./sprites/rainbow-border.png')
+        this.rainbowSprite.anchor.set(0.5)
+        this.rainbowSprite.width = border.width * 1.043
+        this.rainbowSprite.height = border.height * 1.043
+        this.colorMatrix = new PIXI.filters.ColorMatrixFilter()
+        this.rainbowSprite.filters = [this.colorMatrix] 
+        this.hueDegree = 0
+        this.rainbowSprite.visible = this.core.settings.rainbowBorder
+
+        this.stage.addChild(this.rainbowSprite)
+        this.performHueShifting()
+    }
+
+    performHueShifting() {
+        this.hueDegree += 1
+        if (this.hueDegree > 360) this.hueDegree = 0
+        this.colorMatrix.hue(this.hueDegree)
+        requestAnimationFrame(this.performHueShifting.bind(this))
+    }
+
     drawGrid() {
         if (this.gridSprite) this.gridSprite.destroy()
 
