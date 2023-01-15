@@ -103,7 +103,8 @@ export default class {
             view,
             width: innerWidth,
             height: innerHeight,
-            antialiasing: false
+            antialiasing: false,
+            powerPreference: 'high-performance'
         })
         this.stage = new PIXI.Container()
         this.stage.sortableChildren = true
