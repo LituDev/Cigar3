@@ -60,6 +60,8 @@ export default class {
     }
 
     drawRainbowBorder() {
+        if (this.rainbowSprite) this.rainbowSprite.destroy()
+        
         const border = this.core.net.border
         this.rainbowSprite = new PIXI.Sprite.from('./sprites/rainbow-border.png')
         this.rainbowSprite.anchor.set(0.5)
