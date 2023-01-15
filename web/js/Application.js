@@ -82,6 +82,8 @@ export default class {
     }
 
     drawGrid() {
+        if (this.gridSprite) this.gridSprite.destroy()
+
         const border = this.core.net.border
         const g = new PIXI.Graphics()
         const width = 100
@@ -93,11 +95,11 @@ export default class {
         g.lineTo(width / 2, -height / 2)
         const texture = this.renderer.generateTexture(g, PIXI.SCALE_MODES.LINEAR, 1, new PIXI.Rectangle(0, 0, width / 2, height / 2))
         texture.baseTexture.mipmap = true
-        const gridSprite = new PIXI.TilingSprite(texture, border.width, border.height)
-        gridSprite.position.set(-border.width / 2, -border.height / 2)
-        gridSprite.visible = this.core.settings.grid
+        this.gridSprite = new PIXI.TilingSprite(texture, border.width, border.height)
+        this.gridSprite.position.set(-border.width / 2, -border.height / 2)
+        this.gridSprite.visible = this.core.settings.grid
 
-        this.stage.addChild(gridSprite)
+        this.stage.addChild(this.gridSprite)
     }
 
     initMinimap() {
