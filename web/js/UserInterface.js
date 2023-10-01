@@ -12,6 +12,9 @@ export default class UserInterface {
             y: 0
         }
 
+        this.keysPressed = {};
+        this.ejectInterval = null;
+
         this.userInterface = document.getElementById("user-interface")
         this.playButton = document.getElementById("play")
         this.spectateButton = document.getElementById("spectate")
@@ -33,8 +36,8 @@ export default class UserInterface {
         }, 40)
 
         this.nameInput.value = this.core.store.name
-        this.skinButton.style.backgroundImage = `url("${this.core.store.skin}")` 
-        
+        this.skinButton.style.backgroundImage = `url("${this.core.store.skin}")`
+
         this.addEvents()
     }
 
@@ -49,16 +52,20 @@ export default class UserInterface {
         this.onResize = this.onResize.bind(this)
         this.onScroll = this.onScroll.bind(this)
         this.onServers = this.onServers.bind(this)
+        this.onKeyUp = this.onKeyUp.bind(this)
 
         this.playButton.addEventListener("click", this.onPlay)
         this.spectateButton.addEventListener("click", this.onSpectate)
         this.settingsButton.addEventListener("click", this.onSettings)
         this.serversButton.addEventListener("click", this.onServers)
         this.skinButton.addEventListener("click", this.onSkin)
-        addEventListener("keydown", this.onKeyDown)
+        addEventListener("keydown", this.onKeyDown);
+        addEventListener("keyup", this.onKeyUp);
         this.nameInput.addEventListener("change", this.onNameChange)
         this.core.app.view.addEventListener("mousemove", this.onMouseMove)
-        this.core.app.view.addEventListener('wheel', this.onScroll, { passive: true })
+        this.core.app.view.addEventListener('wheel', this.onScroll, {
+            passive: true
+        })
         addEventListener("resize", this.onResize)
         addEventListener("beforeunload", (event) => {
             this.core.store.settings = this.core.settings.rawSettings
@@ -184,59 +191,78 @@ export default class UserInterface {
         })
     }
 
-    onMouseMove({clientX, clientY}) {
+    onMouseMove({
+        clientX,
+        clientY
+    }) {
         this.mouse.x = clientX
         this.mouse.y = clientY
     }
 
-    onScroll({ deltaY }) {
-        this.core.app.camera.w += deltaY * -.001//event.deltaY * -1 / 1000;
+    onScroll({
+        deltaY
+    }) {
+        this.core.app.camera.w += deltaY * -.001 //event.deltaY * -1 / 1000;
         this.core.app.camera.w = Math.min(Math.max(.05, this.core.app.camera.w), 8)
     }
 
-    onKeyDown({ code }) {
+    onKeyDown({
+        code
+    }) {
+        this.keysPressed[code] = true;
+
         switch (code) {
-            case "Escape": {
-                this.setPanelState(true)
-                break
-            }
-            case "KeyW": {
-                this.core.net.sendEject()
-                break
-            }  
-            case "Space": {
-                this.core.net.sendSplit()
-                break
-            }
-            case "KeyQ": {
-                this.core.net.sendMinionSwitch()
-                break
-            }
-            case "Enter": {
+            case "Escape":
+                this.setPanelState(true);
+                break;
+            case "KeyW":
+                if (!this.ejectInterval) {
+                    this.core.net.sendEject();
+                    this.ejectInterval = setInterval(() => {
+                        if (this.keysPressed["KeyW"]) this.core.net.sendEject();
+                        else clearInterval(this.ejectInterval);
+                    }, 50);
+                }
+                break;
+            case "Space":
+                this.core.net.sendSplit();
+                break;
+            case "KeyQ":
+                this.core.net.sendMinionSwitch();
+                break;
+            case "Enter":
                 if (document.activeElement === this.chatField) {
-                    const value = this.chatField.value
-                    if (value !== "") this.core.net.sendChatMessage(value)
-                    this.chatField.blur()
-                    this.chatField.value = ""
-                } else this.chatField.focus()
-                break
-            }
-            case "KeyE": {
-                this.core.net.sendE()
-                break
-            }
-            case "KeyR": {
-                this.core.net.sendR()
-                break
-            }
-            case "KeyT": {
-                this.core.net.sendT()
-                break
-            }
-            case "KeyP": {
-                this.core.net.sendP()
-                break
-            }
+                    const value = this.chatField.value;
+                    if (value !== "") this.core.net.sendChatMessage(value);
+                    this.chatField.blur();
+                    this.chatField.value = "";
+                } else this.chatField.focus();
+                break;
+            case "KeyE":
+                this.core.net.sendE();
+                break;
+            case "KeyR":
+                this.core.net.sendR();
+                break;
+            case "KeyT":
+                this.core.net.sendT();
+                break;
+            case "KeyP":
+                this.core.net.sendP();
+                break;
+        }
+    }
+
+    onKeyUp({
+        code
+    }) {
+        console.log(code)
+        console.log(this.keysPressed)
+        this.keysPressed[code] = false;
+
+        if (code === "KeyW" && this.ejectInterval) {
+            clearInterval(this.ejectInterval);
+            this.ejectInterval = null;
         }
     }
 
@@ -252,4 +278,4 @@ export default class UserInterface {
     onNameChange() {
         this.core.store.name = this.nameInput.value
     }
-} 
+}
