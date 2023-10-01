@@ -256,8 +256,6 @@ export default class UserInterface {
     onKeyUp({
         code
     }) {
-        console.log(code)
-        console.log(this.keysPressed)
         this.keysPressed[code] = false;
 
         if (code === "KeyW" && this.ejectInterval) {
