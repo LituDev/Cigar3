@@ -79,4 +79,13 @@ export default class {
         this.core.app.gridSprite.visible = value
         this.rawSettings.grid = value
     }
+
+    get sectors() {
+        return this.rawSettings.sectors
+    }
+    
+    set sectors(value) {
+        this.core.app.sectorContainer.visible = value
+        this.rawSettings.sectors = value
+    }
 }

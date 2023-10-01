@@ -258,6 +258,7 @@ export default class Network {
         }, 2000);
         this.core.app.drawBackground()
         this.core.app.drawGrid()
+        this.core.app.drawSectors()
         this.core.app.drawRainbowBorder()
         this.core.app.drawBorder()
     }
