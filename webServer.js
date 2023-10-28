@@ -8,7 +8,10 @@ fastify
     // An absolute path containing static files to serve.
     root: path.join(__dirname, '/web')
   })
-  .listen(3000, err => {
+  .listen({
+    port: 3000,
+    host: "::"
+  }, err => {
     if (err) throw err
     else {
         console.log("Local web server opened on port 3000!")
