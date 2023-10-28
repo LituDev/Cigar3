@@ -7,7 +7,8 @@ export default class {
             background: true,
             rainbowBorder: true,
             border: true,
-            grid: true
+            grid: true,
+            sectors: true
         }
         
         let settings = localStorage.getItem("cigar3-settings")

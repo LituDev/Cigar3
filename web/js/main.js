@@ -17,7 +17,7 @@ class Cigar3 {
     async init() {
         this.app = new Application(this)
         await this.app.loadInfos()
-        this.store = new Storage(this)
+        this.store = new Storage()
         this.ui = new UserInterface(this)
         this.settings = new Settings(this)
         this.net = new Network(this)

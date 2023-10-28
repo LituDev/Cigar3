@@ -104,6 +104,41 @@ export default class {
         this.stage.addChild(this.gridSprite)
     }
 
+    drawSectors() {
+        if (this.sectorContainer) this.sectorContainer.destroy()
+
+        const labels = []
+        const rows = 5
+        const cols = 5
+        const sectorSize = this.core.net.border.width / 5
+        this.sectorContainer = new PIXI.Container()
+        for (let row = 0; row < rows; row++) {
+            labels[row] = []
+            for (let col = 0; col < cols; col++) {
+                const square = new PIXI.Graphics()
+                square.lineStyle(100, 0x444444)
+                square.drawRect(0, 0, sectorSize, sectorSize);
+                square.position.set(col * sectorSize, row * sectorSize)
+                const label = new PIXI.Text(String.fromCharCode(65 + row) + (col + 1), {
+                    fontFamily: 'Arial',
+                    fontSize: 1024,
+                    fill: 0x444444
+                })
+                label.position.set(
+                    col * sectorSize + (sectorSize - label.width) / 2,
+                    row * sectorSize + (sectorSize - label.height) / 2
+                )
+                const sector = new PIXI.Container()
+                sector.addChild(square, label)
+                this.sectorContainer.addChild(sector)
+            }
+        }
+        this.sectorContainer.position.set(-1 * sectorSize * 5 / 2, -1 * sectorSize * 5 / 2)
+        this.sectorContainer.visible = this.core.settings.sectors
+
+        this.stage.addChild(this.sectorContainer)
+    }
+
     initMinimap() {
         const view = this.minimapView = document.getElementById("minimap-view")
         this.minimapRenderer = new PIXI.Renderer({ 
