@@ -63,7 +63,6 @@ export default class Network {
         this.ws = null
         this.minionControlled = false
         this.ping = 0
-        this.leaderboardItems = []
         this.messages = []
         this.border = {
             left: 0,
@@ -75,6 +74,9 @@ export default class Network {
             width: 0,
             height: 0
         }
+        clearInterval(this.pingLoop)
+        clearInterval(this.mouseMoveInterval)
+        cancelAnimationFrame(this.core.app.hueShiftingRAF)
     }
 
     send(data) {
@@ -87,7 +89,7 @@ export default class Network {
         this.send(new Uint8Array([254, 6, 0, 0, 0]))
         this.send(new Uint8Array([255, 1, 0, 0, 0]))
 
-        setInterval(() => {
+        this.mouseMoveInterval = setInterval(() => {
             this.sendMouseMove(
                 (this.core.ui.mouse.x - innerWidth / 2) / this.core.app.camera.s + this.core.app.camera.x,
                 (this.core.ui.mouse.y - innerHeight / 2) / this.core.app.camera.s + this.core.app.camera.y

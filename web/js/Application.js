@@ -80,7 +80,7 @@ export default class {
         this.hueDegree += 1
         if (this.hueDegree > 360) this.hueDegree = 0
         this.colorMatrix.hue(this.hueDegree)
-        requestAnimationFrame(this.performHueShifting.bind(this))
+        this.hueShiftingRAF = requestAnimationFrame(this.performHueShifting.bind(this))
     }
 
     drawGrid() {
